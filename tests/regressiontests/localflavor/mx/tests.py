@@ -5,8 +5,8 @@ from forms import MXPersonProfileForm
 class MXLocalFlavorTests(TestCase):
     def setUp(self):
         self.form = MXPersonProfileForm({
-            'state':'MIC',
-            'rfc':'aaa010101aaa',
+            'state': 'MIC',
+            'rfc': 'aaa010101aaa',
             'curp': 'toma880125hmnrrn02',
             'zip_code': '58120',
         })
@@ -26,8 +26,8 @@ class MXLocalFlavorTests(TestCase):
         })
         self.assertFalse(form.is_valid())
         self.assertEqual(form.errors['state'], [u'Select a valid choice. Invalid state is not one of the available choices.'])
-        self.assertEqual(form.errors['rfc'], [u'Enter a valid RFC.'])
-        self.assertEqual(form.errors['curp'], [u'Enter a valid CURP.'])
+        self.assertEqual(form.errors['rfc'], [u'Ensure this value has at least 12 characters (it has 11).', u'Enter a valid RFC.'])
+        self.assertEqual(form.errors['curp'], [u'Ensure this value has at least 18 characters (it has 12).', u'Enter a valid CURP.'])
         self.assertEqual(form.errors['zip_code'], [u'Enter a valid zip code in the format XXXXX.'])
 
     def test_field_blank_option(self):

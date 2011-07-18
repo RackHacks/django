@@ -3,18 +3,18 @@
 Mexican-specific form helpers.
 """
 
-from django.forms.fields import Select, RegexField
+from django.forms.fields import Select, RegexField, CharField
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.localflavor.mx.mx_states import STATE_CHOICES
 import re
 
-date_re = r'\d{2}((01|03|05|07|08|10|12)(0[1-9]|[12]\d|3[01])|02(0[1-9]|[12]\d)|(04|06|09|11)(0[1-9]|[12]\d|30))'
+DATE_RE = r'\d{2}((01|03|05|07|08|10|12)(0[1-9]|[12]\d|3[01])|02(0[1-9]|[12]\d)|(04|06|09|11)(0[1-9]|[12]\d|30))'
 
 class MXStateSelect(Select):
     """
     A Select widget that uses a list of Mexican states as its choices.
     """
     def __init__(self, attrs=None):
-        from mx_states import STATE_CHOICES
         super(MXStateSelect, self).__init__(attrs, choices=STATE_CHOICES)
 
 class MXZipCodeField(RegexField):
@@ -29,8 +29,8 @@ class MXZipCodeField(RegexField):
     }
 
     def __init__(self, *args, **kwargs):
-        regex = r'^(0[1-9]|[1][0-6]|[2-9]\d)(\d{3})$'
-        super(MXZipCodeField, self).__init__(regex, *args, **kwargs)
+        zip_code_re = r'^(0[1-9]|[1][0-6]|[2-9]\d)(\d{3})$'
+        super(MXZipCodeField, self).__init__(zip_code_re, *args, **kwargs)
 
 class MXRFCField(RegexField):
     """
@@ -45,7 +45,7 @@ class MXRFCField(RegexField):
     }
 
     def __init__(self, *args, **kwargs):
-        rfc_re = re.compile(ur'^[A-Z&Ññ]{3,4}%s[A-Z0-9]{3}$' % date_re, re.IGNORECASE)
+        rfc_re = re.compile(ur'^[A-Z&Ññ]{3,4}%s[A-Z0-9]{3}$' % DATE_RE, re.IGNORECASE)
         super(MXRFCField, self).__init__(rfc_re, *args, **kwargs)
 
     def clean(self, value):
@@ -67,7 +67,7 @@ class MXCURPField(RegexField):
     def __init__(self, *args, **kwargs):
         states_re = r'(AS|BC|BS|CC|CL|CM|CS|CH|DF|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QT|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS|NE)'
         consonants_re = r'[B-DF-HJ-NP-TV-Z]'
-        curp_re = ur'^[A-Z]{4}%s[HM]%s%s{3}\d{2}$' % (date_re, states_re, consonants_re)
+        curp_re = ur'^[A-Z]{4}%s[HM]%s%s{3}\d{2}$' % (DATE_RE, states_re, consonants_re)
         curp_re = re.compile(curp_re, re.IGNORECASE)
         super(MXCURPField, self).__init__(curp_re, *args, **kwargs)
 

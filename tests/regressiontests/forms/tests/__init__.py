@@ -38,6 +38,7 @@ from regressiontests.forms.localflavortests import (
     JPLocalFlavorTests,
     KWLocalFlavorTests,
     MKLocalFlavorTests,
+    MXLocalFlavorTests,
     NLLocalFlavorTests,
     PLLocalFlavorTests,
     PTLocalFlavorTests,

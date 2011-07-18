@@ -63,9 +63,10 @@ class MXLocalFlavorTests(LocalFlavorTestCase):
     def test_MXRFCField(self):
         error_format = [u'Enter a valid RFC.']
         valid = {
-            'AA&000606I37': u'AA&000606I37',
-            'MED0107173XA': u'MED0107173XA',
+            'aa&000606i37': u'AA&000606I37',
+            'MeD0107173XA': u'MED0107173XA',
             'GAÑ070824GF4': u'GAÑ070824GF4',
+            'gañ000824gf4': u'GAÑ000824GF4',
             'MED0107173XA': u'MED0107173XA',
             '&A&121212123': u'&A&121212123',
             'MEDA0102293XA': u'MEDA0102293XA',
@@ -85,9 +86,9 @@ class MXLocalFlavorTests(LocalFlavorTestCase):
     def test_MXCURPField(self):
         error_format = [u'Enter a valid CURP.']
         valid = {
-            'AAMG890608HDFLJL00': u'AAMG890608HDFLJL00',
-            'BAAD890419HMNRRV07': u'BAAD890419HMNRRV07',
-            'VIAA900930MMNCLL08': u'VIAA900930MMNCLL08',
+            'AaMG890608HDFLJL00': u'AAMG890608HDFLJL00',
+            'BAAd890419HMNRRV07': u'BAAD890419HMNRRV07',
+            'VIAA900930MMNClL08': u'VIAA900930MMNCLL08',
         }
         invalid = {
             'VIAA900930MMXCLL08': error_format,

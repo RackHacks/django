@@ -44,9 +44,11 @@ class MXRFCField(RegexField):
         'invalid': _('Enter a valid RFC.'),
     }
 
-    def __init__(self, *args, **kwargs):
-        rfc_re = re.compile(ur'^[A-Z&Ññ]{3,4}%s[A-Z0-9]{3}$' % DATE_RE, re.IGNORECASE)
-        super(MXRFCField, self).__init__(rfc_re, *args, **kwargs)
+    def __init__(self, min_length=12, max_length=13, *args, **kwargs):
+        rfc_re = re.compile(ur'^[A-Z&Ññ]{3,4}%s[A-Z0-9]{3}$' % DATE_RE,
+                            re.IGNORECASE)
+        super(MXRFCField, self).__init__(rfc_re, min_length=min_length,
+                                         max_length=max_length, *args, **kwargs)
 
     def clean(self, value):
         value = super(MXRFCField, self).clean(value)
@@ -64,12 +66,14 @@ class MXCURPField(RegexField):
         'invalid': _('Enter a valid CURP.'),
     }
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, min_length=18, max_length=18, *args, **kwargs):
         states_re = r'(AS|BC|BS|CC|CL|CM|CS|CH|DF|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QT|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS|NE)'
         consonants_re = r'[B-DF-HJ-NP-TV-Z]'
-        curp_re = ur'^[A-Z]{4}%s[HM]%s%s{3}\d{2}$' % (DATE_RE, states_re, consonants_re)
+        curp_re = ur'^[A-Z]{4}%s[HM]%s%s{3}\d{2}$' % (DATE_RE, states_re,
+                                                      consonants_re)
         curp_re = re.compile(curp_re, re.IGNORECASE)
-        super(MXCURPField, self).__init__(curp_re, *args, **kwargs)
+        super(MXCURPField, self).__init__(curp_re, min_length=min_length,
+                                          max_length=max_length, *args, **kwargs)
 
     def clean(self, value):
         value = super(MXCURPField, self).clean(value)

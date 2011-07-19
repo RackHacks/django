@@ -30,7 +30,7 @@ class MXRFCField(CharField):
     description = _("Mexican RFC")
 
     def __init__(self, *args, **kwargs):
-        kwargs['max_length'] = 14
+        kwargs['max_length'] = 13
         super(MXRFCField, self).__init__(*args, **kwargs)
     
     def formfield(self, **kwargs):

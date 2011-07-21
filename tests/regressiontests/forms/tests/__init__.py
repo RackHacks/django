@@ -19,8 +19,8 @@ from regressiontests.forms.localflavortests import (
     FRLocalFlavorTests, GenericLocalFlavorTests, IDLocalFlavorTests,
     IELocalFlavorTests, ILLocalFlavorTests, ISLocalFlavorTests,
     ITLocalFlavorTests, JPLocalFlavorTests, KWLocalFlavorTests,
-    NLLocalFlavorTests, PLLocalFlavorTests, PTLocalFlavorTests,
-    ROLocalFlavorTests, SELocalFlavorTests, SKLocalFlavorTests,
-    TRLocalFlavorTests, UKLocalFlavorTests, USLocalFlavorTests,
-    UYLocalFlavorTests, ZALocalFlavorTests
+    MXLocalFlavorTests, NLLocalFlavorTests, PLLocalFlavorTests,
+    PTLocalFlavorTests, ROLocalFlavorTests, SELocalFlavorTests,
+    SKLocalFlavorTests, TRLocalFlavorTests, UKLocalFlavorTests,
+    USLocalFlavorTests, UYLocalFlavorTests, ZALocalFlavorTests
 )

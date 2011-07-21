@@ -8,7 +8,6 @@ from django.forms.fields import Select, RegexField, CharField
 from django.utils.translation import ugettext_lazy as _
 from django.core.validators import EMPTY_VALUES
 from django.contrib.localflavor.mx.mx_states import STATE_CHOICES
-from datetime import date
 import re
 
 DATE_RE = r'\d{2}((01|03|05|07|08|10|12)(0[1-9]|[12]\d|3[01])|02(0[1-9]|[12]\d)|(04|06|09|11)(0[1-9]|[12]\d|30))'

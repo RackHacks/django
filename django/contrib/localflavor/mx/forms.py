@@ -136,6 +136,20 @@ class MXCURPField(RegexField):
     """
     A field that validates a `Clave Única de Registro de Población`.
     
+    The CURP is integrated by a juxtaposition of characters following the next
+    pattern:
+    
+    Index    Format    Accepted Characters
+    1        X         Any letter
+    2        X         Any vowel
+    3-4      XX        Any letter
+    5-10     YYMMDD    Any valid date
+    11       X         Either `H` or `M`, depending on the person's gender
+    12-13    XX        Any valid acronym for a state in Mexico
+    14-16    XXX       Any consonant
+    17       X         Any number between 0 and 9 or any letter
+    18       X         Any number between 0 and 9
+    
     More info about this:
         http://www.condusef.gob.mx/index.php/clave-unica-de-registro-de-poblacion-curp
     """

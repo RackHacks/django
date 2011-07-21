@@ -63,23 +63,33 @@ class MXLocalFlavorTests(LocalFlavorTestCase):
     def test_MXRFCField(self):
         error_format = [u'Enter a valid RFC.']
         valid = {
-            'aa&000606i37': u'AA&000606I37',
-            'MeD0107173XA': u'MED0107173XA',
-            'GAÑ070824GF4': u'GAÑ070824GF4',
-            'gañ000824gf4': u'GAÑ000824GF4',
-            'MED0107173XA': u'MED0107173XA',
-            '&A&121212123': u'&A&121212123',
-            'MEDA0102293XA': u'MEDA0102293XA',
+            'MoFN641205eX5': u'MOFN641205EX5',
+            'ICa060120873': u'ICA060120873',
+            'eUcG751104rT0': u'EUCG751104RT0',
+            'GME08100195A': u'GME08100195A',
+            'AA&060524KX5': u'AA&060524KX5',
+            'CAÑ0708045P7': u'CAÑ0708045P7',
+            'aaa000101aa9': u'AAA000101AA9',
         }
         invalid = {
             'MED0000000XA': error_format,
             '0000000000XA': error_format,
+            'AAA000000AA6': error_format,
             # Dates
             'XXX880002XXX': error_format,
             'XXX880200XXX': error_format,
             'XXX880132XXX': error_format,
             'XXX880230XXX': error_format,
             'XXX880431XXX': error_format,
+            # Incorrect checksum
+            'MOGR650524E73': error_format,
+            'HVA7810058F1': error_format,
+            'MoFN641205eX2': error_format,
+            'ICa060120871': error_format,
+            'eUcG751104rT7': error_format,
+            'GME081001955': error_format,
+            'AA&060524KX9': error_format,
+            'CAÑ0708045P2': error_format,
         }
         self.assertFieldOutput(MXRFCField, valid, invalid)
 
@@ -89,8 +99,27 @@ class MXLocalFlavorTests(LocalFlavorTestCase):
             'AaMG890608HDFLJL00': u'AAMG890608HDFLJL00',
             'BAAd890419HMNRRV07': u'BAAD890419HMNRRV07',
             'VIAA900930MMNClL08': u'VIAA900930MMNCLL08',
+            'HEGR891009HMNRRD09': u'HEGR891009HMNRRD09',
+            'MARR890512HMNRMN09': u'MARR890512HMNRMN09',
+            'MESJ890928HMNZNS00': u'MESJ890928HMNZNS00',
+            'BAAA890317HDFRLL03': u'BAAA890317HDFRLL03',
+            'TOMA880125HMNRRNO2': u'TOMA880125HMNRRNO2',
+            'OOMG890727HMNRSR06': u'OOMG890727HMNRSR06',
+            'AAAA000101HDFCCC09': u'AAAA000101HDFCCC09',
         }
         invalid = {
-            'VIAA900930MMXCLL08': error_format,
+            'AAAA000000HDFCCC09': error_format,
+            'AAAA000000HDFAAA03': error_format,
+            'AAAA000000HXXCCC08': error_format,
+            'AAAA000000XMNCCC02': error_format,
+            'AaMG890608HDFLJL01': error_format,
+            'BAAd890419HMNRRV08': error_format,
+            'VIAA900930MMNClL09': error_format,
+            'HEGR891009HMNRRD0A': error_format,
+            'MARR890512HMNRMN0A': error_format,
+            'MESJ890928HMNZNS01': error_format,
+            'BAAA890317HDFRLL04': error_format,
+            'TOMA880125HMNRRNO3': error_format,
+            'OOMG890727HMNRSR07': error_format,
         }
         self.assertFieldOutput(MXCURPField, valid, invalid)

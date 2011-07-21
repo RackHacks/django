@@ -18,7 +18,7 @@ class MXZipCodeField(CharField):
     def __init__(self, *args, **kwargs):
         kwargs['max_length'] = 5
         super(MXZipCodeField, self).__init__(*args, **kwargs)
-    
+
     def formfield(self, **kwargs):
         from django.contrib.localflavor.mx.forms import MXZipCodeField as Field
         defaults = {'form_class': Field}
@@ -32,7 +32,7 @@ class MXRFCField(CharField):
     def __init__(self, *args, **kwargs):
         kwargs['max_length'] = 13
         super(MXRFCField, self).__init__(*args, **kwargs)
-    
+
     def formfield(self, **kwargs):
         from django.contrib.localflavor.mx.forms import MXRFCField as Field
         defaults = {'form_class': Field}
@@ -46,7 +46,7 @@ class MXCURPField(CharField):
     def __init__(self, *args, **kwargs):
         kwargs['max_length'] = 18
         super(MXCURPField, self).__init__(*args, **kwargs)
-    
+
     def formfield(self, **kwargs):
         from django.contrib.localflavor.mx.forms import MXCURPField as Field
         defaults = {'form_class': Field}

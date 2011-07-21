@@ -80,7 +80,7 @@ class MXRFCField(RegexField):
         1        X          Any letter
         2        X          Any vowel
         3-4      XX         Any letter
-        5-10     YYMMDD     Date
+        5-10     YYMMDD     Any valid date
         11-12    XX         Any letter or number between 0 and 9
         13       X          Any digit between 0 and 9 or the letter `A`
     

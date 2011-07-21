@@ -55,7 +55,7 @@ class MXStateSelect(Select):
 
 class MXZipCodeField(RegexField):
     """
-    A field that accepts a `classic` MX Zip Code.
+    A field that accepts a Mexican Zip Code.
 
     More info about this:
         http://en.wikipedia.org/wiki/List_of_postal_codes_in_Mexico
@@ -70,8 +70,8 @@ class MXZipCodeField(RegexField):
 
 class MXRFCField(RegexField):
     """
-    A field that validates a `Registro Federal de Contribuyentes` for either
-    `Persona física` or `Persona moral`.
+    A field that validates a Mexican `Registro Federal de Contribuyentes` for
+    either `Persona física` or `Persona moral`.
 
     The `Persona física` RFC string is integrated by a juxtaposition of characters
     following the next pattern:
@@ -121,7 +121,7 @@ class MXRFCField(RegexField):
         """
         This check is done due to the existance of RFCs without a `homoclave`
         since the current algorithm to calculate it had not been created for
-        the first RFCs ever in mexico.
+        the first RFCs ever in Mexico.
         """
         rfc_without_homoclave_re = re.compile(ur'^[A-Z&Ññ]{3,4}%s$' % DATE_RE,
                                               re.IGNORECASE)
@@ -152,7 +152,7 @@ class MXRFCField(RegexField):
 
 class MXCURPField(RegexField):
     """
-    A field that validates a `Clave Única de Registro de Población`.
+    A field that validates a Mexican `Clave Única de Registro de Población`.
 
     The CURP is integrated by a juxtaposition of characters following the next
     pattern:

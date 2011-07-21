@@ -3,6 +3,9 @@ from django.db.models.fields import CharField
 from django.contrib.localflavor.mx.mx_states import STATE_CHOICES
 
 class MXStateField(CharField):
+    """
+    A model field that uses a list of Mexican states as its choices.
+    """
 
     description = _("Mexico state (three uppercase letters)")
 
@@ -12,6 +15,10 @@ class MXStateField(CharField):
         super(MXStateField, self).__init__(*args, **kwargs)
 
 class MXZipCodeField(CharField):
+    """
+    A model field that forms represent as a forms.MXZipCodeField field and
+    stores the five-digit Mexican zip code.
+    """
 
     description = _("Mexico zip code")
 
@@ -26,6 +33,10 @@ class MXZipCodeField(CharField):
         return super(MXZipCodeField, self).formfield(**defaults)
 
 class MXRFCField(CharField):
+    """
+    A model field that forms represent as a forms.MXRFCField field and
+    stores the value of a valid Mexican RFC.
+    """
 
     description = _("Mexican RFC")
 
@@ -40,6 +51,10 @@ class MXRFCField(CharField):
         return super(MXRFCField, self).formfield(**defaults)
 
 class MXCURPField(CharField):
+    """
+    A model field that forms represent as a forms.MXCURPField field and
+    stores the value of a valid Mexican CURP.
+    """
 
     description = _("Mexican CURP")
 

@@ -56,7 +56,7 @@ class MXStateSelect(Select):
 class MXZipCodeField(RegexField):
     """
     A field that accepts a `classic` MX Zip Code.
-    
+
     More info about this:
         http://en.wikipedia.org/wiki/List_of_postal_codes_in_Mexico
     """
@@ -72,8 +72,8 @@ class MXRFCField(RegexField):
     """
     A field that validates a `Registro Federal de Contribuyentes` for either
     `Persona física` or `Persona moral`.
-    
-    The `Persona física` RFC string is integrated by a juxtaposition of characters 
+
+    The `Persona física` RFC string is integrated by a juxtaposition of characters
     following the next pattern:
         Index    Format     Accepted Characters
         1        X          Any letter
@@ -82,15 +82,15 @@ class MXRFCField(RegexField):
         5-10     YYMMDD     Any valid date
         11-12    XX         Any letter or number between 0 and 9
         13       X          Any digit between 0 and 9 or the letter `A`
-    
-    The `Persona moral` RFC string is integrated by a juxtaposition of characters 
+
+    The `Persona moral` RFC string is integrated by a juxtaposition of characters
     following the next pattern:
         Index    Format     Accepted Characters
         1-3      XXX        Any letter including `&` and `Ñ` chars
         4-9      YYMMDD     Any valid date
         10-11    XX         Any letter or number between 0 and 9
         12       X          Any number between 0 and 9 or the letter `A`
-        
+
     More info about this:
         http://es.wikipedia.org/wiki/Registro_Federal_de_Contribuyentes_(M%C3%A9xico)
     """
@@ -135,10 +135,10 @@ class MXRFCField(RegexField):
         chars = u'0123456789ABCDEFGHIJKLMN&OPQRSTUVWXYZ-Ñ'
         if len(rfc) is 11:
             rfc = '-' + rfc
-            
+
         sum_ = sum(i * chars.index(c) for i, c in zip(reversed(xrange(14)), rfc))
         checksum = 11 - sum_ % 11
-        
+
         if checksum == 10:
             return u'A'
         elif checksum == 11:
@@ -153,10 +153,10 @@ class MXRFCField(RegexField):
 class MXCURPField(RegexField):
     """
     A field that validates a `Clave Única de Registro de Población`.
-    
+
     The CURP is integrated by a juxtaposition of characters following the next
     pattern:
-    
+
     Index    Format    Accepted Characters
     1        X         Any letter
     2        X         Any vowel
@@ -167,7 +167,7 @@ class MXCURPField(RegexField):
     14-16    XXX       Any consonant
     17       X         Any number between 0 and 9 or any letter
     18       X         Any number between 0 and 9
-    
+
     More info about this:
         http://www.condusef.gob.mx/index.php/clave-unica-de-registro-de-poblacion-curp
     """
@@ -198,10 +198,10 @@ class MXCURPField(RegexField):
 
     def _checksum(self, value):
         chars = u'0123456789ABCDEFGHIJKLMN&OPQRSTUVWXYZ'
-        
+
         s = sum(i * chars.index(c) for i, c in zip(reversed(xrange(19)), value))
         checksum = 10 - s % 10
-        
+
         if checksum == 10:
             return u'0'
         return unicode(checksum)

@@ -74,11 +74,30 @@ class MXRFCField(RegexField):
     A field that validates a `Registro Federal de Contribuyentes` for either
     `Persona física` or `Persona moral`.
     
+    The `Persona física` RFC string is integrated by a juxtaposition of characters 
+    following the next pattern:
+        Index    Format     Accepted Characters
+        1        X          Any letter
+        2        X          Any vowel
+        3-4      XX         Any letter
+        5-10     YYMMDD     Date
+        11-12    XX         Any letter or number between 0 and 9
+        13       X          Any digit between 0 and 9 or the letter `A`
+    
+    The `Persona moral` RFC string is integrated by a juxtaposition of characters 
+    following the next pattern:
+        Index    Format     Accepted Characters
+        1-3      XXX        Any letter including `&` and `Ñ` chars
+        4-9      YYMMDD     Any valid date
+        10-11    XX         Any letter or number between 0 and 9
+        12       X          Any number between 0 and 9 or the letter `A`
+        
     More info about this:
         http://es.wikipedia.org/wiki/Registro_Federal_de_Contribuyentes_(M%C3%A9xico)
     """
     default_error_messages = {
         'invalid': _(u'Enter a valid RFC.'),
+        'invalid_checksum': _(u'Invalid checksum for RFC.'),
     }
 
     def __init__(self, min_length=9, max_length=13, *args, **kwargs):
@@ -94,7 +113,7 @@ class MXRFCField(RegexField):
         value = value.upper()
         if self._has_homoclave(value):
             if not value[-1] == self._checksum(value[:-1]):
-                raise ValidationError(self.default_error_messages['invalid'])
+                raise ValidationError(self.default_error_messages['invalid_checksum'])
         if self._has_inconvenient_word(value):
             raise ValidationError(self.default_error_messages['invalid'])
         return value
@@ -155,6 +174,7 @@ class MXCURPField(RegexField):
     """
     default_error_messages = {
         'invalid': _('Enter a valid CURP.'),
+        'invalid_checksum': _(u'Invalid checksum for CURP.'),
     }
 
     def __init__(self, min_length=18, max_length=18, *args, **kwargs):
@@ -172,7 +192,7 @@ class MXCURPField(RegexField):
             return u''
         value = value.upper()
         if value[-1] != self._checksum(value[:-1]):
-            raise ValidationError(self.default_error_messages['invalid'])
+            raise ValidationError(self.default_error_messages['invalid_checksum'])
         if self._has_inconvenient_word(value):
             raise ValidationError(self.default_error_messages['invalid'])
         return value
@@ -184,7 +204,7 @@ class MXCURPField(RegexField):
         checksum = 10 - s % 10
         
         if checksum == 10:
-          return u'0'
+            return u'0'
         return unicode(checksum)
 
     def _has_inconvenient_word(self, curp):

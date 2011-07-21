@@ -62,6 +62,7 @@ class MXLocalFlavorTests(LocalFlavorTestCase):
 
     def test_MXRFCField(self):
         error_format = [u'Enter a valid RFC.']
+        error_checksum = [u'Invalid checksum for RFC.']
         valid = {
             'MoFN641205eX5': u'MOFN641205EX5',
             'ICa060120873': u'ICA060120873',
@@ -82,19 +83,20 @@ class MXLocalFlavorTests(LocalFlavorTestCase):
             'XXX880230XXX': error_format,
             'XXX880431XXX': error_format,
             # Incorrect checksum
-            'MOGR650524E73': error_format,
-            'HVA7810058F1': error_format,
-            'MoFN641205eX2': error_format,
-            'ICa060120871': error_format,
-            'eUcG751104rT7': error_format,
-            'GME081001955': error_format,
-            'AA&060524KX9': error_format,
-            'CAÑ0708045P2': error_format,
+            'MOGR650524E73': error_checksum,
+            'HVA7810058F1': error_checksum,
+            'MoFN641205eX2': error_checksum,
+            'ICa060120871': error_checksum,
+            'eUcG751104rT7': error_checksum,
+            'GME081001955': error_checksum,
+            'AA&060524KX9': error_checksum,
+            'CAÑ0708045P2': error_checksum,
         }
         self.assertFieldOutput(MXRFCField, valid, invalid)
 
     def test_MXCURPField(self):
         error_format = [u'Enter a valid CURP.']
+        error_checksum = [u'Invalid checksum for CURP.']
         valid = {
             'AaMG890608HDFLJL00': u'AAMG890608HDFLJL00',
             'BAAd890419HMNRRV07': u'BAAD890419HMNRRV07',
@@ -112,14 +114,14 @@ class MXLocalFlavorTests(LocalFlavorTestCase):
             'AAAA000000HDFAAA03': error_format,
             'AAAA000000HXXCCC08': error_format,
             'AAAA000000XMNCCC02': error_format,
-            'AaMG890608HDFLJL01': error_format,
-            'BAAd890419HMNRRV08': error_format,
-            'VIAA900930MMNClL09': error_format,
             'HEGR891009HMNRRD0A': error_format,
             'MARR890512HMNRMN0A': error_format,
-            'MESJ890928HMNZNS01': error_format,
-            'BAAA890317HDFRLL04': error_format,
-            'TOMA880125HMNRRNO3': error_format,
-            'OOMG890727HMNRSR07': error_format,
+            'AaMG890608HDFLJL01': error_checksum,
+            'BAAd890419HMNRRV08': error_checksum,
+            'VIAA900930MMNClL09': error_checksum,
+            'MESJ890928HMNZNS01': error_checksum,
+            'BAAA890317HDFRLL04': error_checksum,
+            'TOMA880125HMNRRNO3': error_checksum,
+            'OOMG890727HMNRSR07': error_checksum,
         }
         self.assertFieldOutput(MXCURPField, valid, invalid)

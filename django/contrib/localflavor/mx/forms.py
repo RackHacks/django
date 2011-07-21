@@ -74,6 +74,24 @@ class MXRFCField(RegexField):
     A field that validates a `Registro Federal de Contribuyentes` for either
     `Persona física` or `Persona moral`.
     
+    The `Persona física` RFC string is integrated by a juxtaposition of characters 
+    following the next pattern:
+        Index    Format     Accepted Characters
+        1        X          Any letter
+        2        X          Any vowel
+        3-4      XX         Any letter
+        5-10     YYMMDD     Date
+        11-12    XX         Any letter or number between 0 and 9
+        13       X          Any digit between 0 and 9 or the letter `A`
+    
+    The `Persona moral` RFC string is integrated by a juxtaposition of characters 
+    following the next pattern:
+        Index    Format     Accepted Characters
+        1-3      XXX        Any letter including `&` and `Ñ` chars
+        4-9      YYMMDD     Any valid date
+        10-11    XX         Any letter or number between 0 and 9
+        12       X          Any number between 0 and 9 or the letter `A`
+        
     More info about this:
         http://es.wikipedia.org/wiki/Registro_Federal_de_Contribuyentes_(M%C3%A9xico)
     """

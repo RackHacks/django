@@ -15,8 +15,7 @@ DATE_RE = r'\d{2}((01|03|05|07|08|10|12)(0[1-9]|[12]\d|3[01])|02(0[1-9]|[12]\d)|
 """
 This is the list of inconvenient words according to the `Anexo IV` of the
 document described in the next link:
-
-    `CURP Inconvenient words <www.sisi.org.mx/jspsi/documentos/2005/seguimiento/06101/0610100162005_065.doc>`_
+    http://www.sisi.org.mx/jspsi/documentos/2005/seguimiento/06101/0610100162005_065.doc
 """
 
 RFC_INCONVENIENT_WORDS = [

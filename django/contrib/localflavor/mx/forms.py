@@ -15,7 +15,8 @@ DATE_RE = r'\d{2}((01|03|05|07|08|10|12)(0[1-9]|[12]\d|3[01])|02(0[1-9]|[12]\d)|
 """
 This is the list of inconvenient words according to the `Anexo IV` of the
 document described in the next link:
-    www.sisi.org.mx/jspsi/documentos/2005/seguimiento/06101/0610100162005_065.doc
+
+    `CURP Inconvenient words <www.sisi.org.mx/jspsi/documentos/2005/seguimiento/06101/0610100162005_065.doc>`_
 """
 
 RFC_INCONVENIENT_WORDS = [
@@ -30,7 +31,8 @@ RFC_INCONVENIENT_WORDS = [
 """
 This is the list of inconvenient words according to the `Anexo 2` of the
 document described in the next link:
-    http://portal.veracruz.gob.mx/pls/portal/url/ITEM/444112558A57C6E0E040A8C02E00695C
+
+    `CURP Inconvenient words <http://portal.veracruz.gob.mx/pls/portal/url/ITEM/444112558A57C6E0E040A8C02E00695C>`_
 """
 CURP_INCONVENIENT_WORDS = [
    u'BACA', u'BAKA', u'BUEI', u'BUEY', u'CACA', u'CACO', u'CAGA', u'CAGO',
@@ -55,10 +57,10 @@ class MXStateSelect(Select):
 
 class MXZipCodeField(RegexField):
     """
-    A field that accepts a Mexican Zip Code.
+    A form field that accepts a Mexican Zip Code.
 
-    More info about this:
-        http://en.wikipedia.org/wiki/List_of_postal_codes_in_Mexico
+    More info about this: List of postal codes in Mexico (zipcodes_)
+    .. _zipcodes: http://en.wikipedia.org/wiki/List_of_postal_codes_in_Mexico
     """
     default_error_messages = {
         'invalid': _(u'Enter a valid zip code in the format XXXXX.'),
@@ -70,29 +72,38 @@ class MXZipCodeField(RegexField):
 
 class MXRFCField(RegexField):
     """
-    A field that validates a Mexican `Registro Federal de Contribuyentes` for
-    either `Persona física` or `Persona moral`.
+    A form field that validates a Mexican *Registro Federal de Contribuyentes* for
+    either *Persona física* or *Persona moral*.
 
-    The `Persona física` RFC string is integrated by a juxtaposition of characters
+    The *Persona física* RFC string is integrated by a juxtaposition of characters
     following the next pattern:
-        Index    Format     Accepted Characters
-        1        X          Any letter
-        2        X          Any vowel
-        3-4      XX         Any letter
-        5-10     YYMMDD     Any valid date
-        11-12    XX         Any letter or number between 0 and 9
-        13       X          Any digit between 0 and 9 or the letter `A`
+    
+        =====  ======  ===========================================
+        Index  Format  Accepted Characters
+        =====  ======  ===========================================
+        1      X       Any letter
+        2      X       Any vowel
+        3-4    XX      Any letter
+        5-10   YYMMDD  Any valid date
+        11-12  XX      Any letter or number between 0 and 9
+        13     X       Any digit between 0 and 9 or the letter *A*
+        =====  ======  ===========================================
 
     The `Persona moral` RFC string is integrated by a juxtaposition of characters
     following the next pattern:
-        Index    Format     Accepted Characters
-        1-3      XXX        Any letter including `&` and `Ñ` chars
-        4-9      YYMMDD     Any valid date
-        10-11    XX         Any letter or number between 0 and 9
-        12       X          Any number between 0 and 9 or the letter `A`
+    
+        =====  ======  ============================================
+        Index  Format  Accepted Characters
+        =====  ======  ============================================
+        1-3    XXX     Any letter including *&* and *Ñ* chars
+        4-9    YYMMDD  Any valid date
+        10-11  XX      Any letter or number between 0 and 9
+        12     X       Any number between 0 and 9 or the letter *A*
+        =====  ======  ============================================
 
-    More info about this:
-        http://es.wikipedia.org/wiki/Registro_Federal_de_Contribuyentes_(M%C3%A9xico)
+    More info about this: Registro Federal de Contribuyentes (rfc_)
+    
+    .. _rfc: http://es.wikipedia.org/wiki/Registro_Federal_de_Contribuyentes_(M%C3%A9xico)
     """
     default_error_messages = {
         'invalid': _(u'Enter a valid RFC.'),
@@ -119,7 +130,7 @@ class MXRFCField(RegexField):
 
     def _has_homoclave(self, rfc):
         """
-        This check is done due to the existance of RFCs without a `homoclave`
+        This check is done due to the existance of RFCs without a *homoclave*
         since the current algorithm to calculate it had not been created for
         the first RFCs ever in Mexico.
         """
@@ -129,8 +140,9 @@ class MXRFCField(RegexField):
 
     def _checksum(self, rfc):
         """
-        More info about this procedure:
-            www.sisi.org.mx/jspsi/documentos/2005/seguimiento/06101/0610100162005_065.doc
+        More info about this procedure: RFC Checksum Procedure (checksum)
+        
+        .. _checksum: www.sisi.org.mx/jspsi/documentos/2005/seguimiento/06101/0610100162005_065.doc
         """
         chars = u'0123456789ABCDEFGHIJKLMN&OPQRSTUVWXYZ-Ñ'
         if len(rfc) is 11:
@@ -152,24 +164,28 @@ class MXRFCField(RegexField):
 
 class MXCURPField(RegexField):
     """
-    A field that validates a Mexican `Clave Única de Registro de Población`.
+    A field that validates a Mexican *Clave Única de Registro de Población*.
 
     The CURP is integrated by a juxtaposition of characters following the next
     pattern:
 
-    Index    Format    Accepted Characters
-    1        X         Any letter
-    2        X         Any vowel
-    3-4      XX        Any letter
-    5-10     YYMMDD    Any valid date
-    11       X         Either `H` or `M`, depending on the person's gender
-    12-13    XX        Any valid acronym for a state in Mexico
-    14-16    XXX       Any consonant
-    17       X         Any number between 0 and 9 or any letter
-    18       X         Any number between 0 and 9
+        =====  ======  ===================================================
+        Index  Format  Accepted Characters
+        =====  ======  ===================================================
+        1      X       Any letter
+        2      X       Any vowel
+        3-4    XX      Any letter
+        5-10   YYMMDD  Any valid date
+        11     X       Either *H* or *M*, depending on the person's gender
+        12-13  XX      Any valid acronym for a state in Mexico
+        14-16  XXX     Any consonant
+        17     X       Any number between 0 and 9 or any letter
+        18     X       Any number between 0 and 9
+        =====  ======  ===================================================
 
-    More info about this:
-        http://www.condusef.gob.mx/index.php/clave-unica-de-registro-de-poblacion-curp
+    More info about this: Clave Unica de Registro de Poblacion (curp_)
+    
+    .. _curp: http://www.condusef.gob.mx/index.php/clave-unica-de-registro-de-poblacion-curp
     """
     default_error_messages = {
         'invalid': _('Enter a valid CURP.'),

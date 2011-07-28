@@ -35,7 +35,7 @@ class MXZipCodeField(CharField):
 
 class MXRFCField(CharField):
     """
-    A model field that forms represent as a ``forms.MXRFCField`` field and
+    A model field that forms represent as a forms.MXRFCField field and
     stores the value of a valid Mexican RFC.
     """
 
@@ -53,7 +53,7 @@ class MXRFCField(CharField):
 
 class MXCURPField(CharField):
     """
-    A model field that forms represent as a ``forms.MXCURPField`` field and
+    A model field that forms represent as a forms.MXCURPField field and
     stores the value of a valid Mexican CURP.
     """
 

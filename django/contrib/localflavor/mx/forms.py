@@ -31,8 +31,7 @@ RFC_INCONVENIENT_WORDS = [
 """
 This is the list of inconvenient words according to the `Anexo 2` of the
 document described in the next link:
-
-    `CURP Inconvenient words <http://portal.veracruz.gob.mx/pls/portal/url/ITEM/444112558A57C6E0E040A8C02E00695C>`_
+    http://portal.veracruz.gob.mx/pls/portal/url/ITEM/444112558A57C6E0E040A8C02E00695C
 """
 CURP_INCONVENIENT_WORDS = [
    u'BACA', u'BAKA', u'BUEI', u'BUEY', u'CACA', u'CACO', u'CAGA', u'CAGO',
@@ -59,8 +58,8 @@ class MXZipCodeField(RegexField):
     """
     A form field that accepts a Mexican Zip Code.
 
-    More info about this: List of postal codes in Mexico (zipcodes_)
-    .. _zipcodes: http://en.wikipedia.org/wiki/List_of_postal_codes_in_Mexico
+    More info about this:
+        http://en.wikipedia.org/wiki/List_of_postal_codes_in_Mexico
     """
     default_error_messages = {
         'invalid': _(u'Enter a valid zip code in the format XXXXX.'),
@@ -73,9 +72,9 @@ class MXZipCodeField(RegexField):
 class MXRFCField(RegexField):
     """
     A form field that validates a Mexican *Registro Federal de Contribuyentes* for
-    either *Persona física* or *Persona moral*.
+    either `Persona física` or `Persona moral`.
 
-    The *Persona física* RFC string is integrated by a juxtaposition of characters
+    The Persona física RFC string is integrated by a juxtaposition of characters
     following the next pattern:
     
         =====  ======  ===========================================
@@ -89,7 +88,7 @@ class MXRFCField(RegexField):
         13     X       Any digit between 0 and 9 or the letter *A*
         =====  ======  ===========================================
 
-    The `Persona moral` RFC string is integrated by a juxtaposition of characters
+    The Persona moral RFC string is integrated by a juxtaposition of characters
     following the next pattern:
     
         =====  ======  ============================================
@@ -101,9 +100,8 @@ class MXRFCField(RegexField):
         12     X       Any number between 0 and 9 or the letter *A*
         =====  ======  ============================================
 
-    More info about this: Registro Federal de Contribuyentes (rfc_)
-    
-    .. _rfc: http://es.wikipedia.org/wiki/Registro_Federal_de_Contribuyentes_(M%C3%A9xico)
+    More info about this:
+        http://es.wikipedia.org/wiki/Registro_Federal_de_Contribuyentes_(M%C3%A9xico)
     """
     default_error_messages = {
         'invalid': _(u'Enter a valid RFC.'),
@@ -140,9 +138,8 @@ class MXRFCField(RegexField):
 
     def _checksum(self, rfc):
         """
-        More info about this procedure: RFC Checksum Procedure (checksum)
-        
-        .. _checksum: www.sisi.org.mx/jspsi/documentos/2005/seguimiento/06101/0610100162005_065.doc
+        More info about this procedure:
+            www.sisi.org.mx/jspsi/documentos/2005/seguimiento/06101/0610100162005_065.doc
         """
         chars = u'0123456789ABCDEFGHIJKLMN&OPQRSTUVWXYZ-Ñ'
         if len(rfc) is 11:
@@ -164,7 +161,7 @@ class MXRFCField(RegexField):
 
 class MXCURPField(RegexField):
     """
-    A field that validates a Mexican *Clave Única de Registro de Población*.
+    A field that validates a Mexican Clave Única de Registro de Población.
 
     The CURP is integrated by a juxtaposition of characters following the next
     pattern:
@@ -176,16 +173,15 @@ class MXCURPField(RegexField):
         2      X       Any vowel
         3-4    XX      Any letter
         5-10   YYMMDD  Any valid date
-        11     X       Either *H* or *M*, depending on the person's gender
+        11     X       Either `H` or `M`, depending on the person's gender
         12-13  XX      Any valid acronym for a state in Mexico
         14-16  XXX     Any consonant
         17     X       Any number between 0 and 9 or any letter
         18     X       Any number between 0 and 9
         =====  ======  ===================================================
 
-    More info about this: Clave Unica de Registro de Poblacion (curp_)
-    
-    .. _curp: http://www.condusef.gob.mx/index.php/clave-unica-de-registro-de-poblacion-curp
+    More info about this:
+        http://www.condusef.gob.mx/index.php/clave-unica-de-registro-de-poblacion-curp
     """
     default_error_messages = {
         'invalid': _('Enter a valid CURP.'),
